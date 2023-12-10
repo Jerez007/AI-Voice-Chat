@@ -36,3 +36,18 @@ def get_response_from_ai(human_input):
 # GUI
 from flask import Flask, render_template, request
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route('/send_message', methods['POST'])
+def send_message():
+    human_input=request.form['human_input']
+    message = get_response_from_ai(human_input)
+    return message
+
+if __name__=="__main__":
+    app.run(debug=True)
+
