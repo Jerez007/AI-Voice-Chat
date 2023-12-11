@@ -5,32 +5,31 @@
 </head>
 <body>
 
-<h1>AI Chatbot</h1>
+    <h1>AI Chatbot</h1>
+    <form id="sampleForm" method="POST" action="/send_message">
+        <input type="text" id="human_input" name="human_input" placeholder="Enter your message">
+        <button type="submit">Send</button>
+    </form>
+    <div id="response_message"></div>
 
-<form id="sampleForm" method="POST" action="/send_message">
-    <input type="text" id="human_input" name="human_input" placeholder="Enter your message"><br><br>
-    <button type="submit" value="Send">
-</form>
-<div id="response_message"></div>
+    <script>
+        const form = document.querySelector('form');
+        const responseMessage = document.getElementById('response_message');
 
-<script>
-    const form = document.querySelector('form');
-    const responseMessage = document.getElementById('response_message');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        fetch('send_message', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            responseMessage.innerHTML = data;
-        });
-        form.reset();
-        });
-</script>
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            fetch('send_message', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                responseMessage.innerHTML = data;
+            });
+            form.reset();
+            });
+    </script>
 
 </body>
 </html>
